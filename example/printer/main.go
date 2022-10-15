@@ -4,7 +4,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/mehditeymorian/koi/v2"
+	"github.com/1995parham/koi"
 )
 
 func main() {
@@ -33,6 +33,5 @@ func main() {
 	log.Println("all job added")
 
 	for {
-
 	}
 }
