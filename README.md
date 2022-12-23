@@ -2,15 +2,21 @@
 <img alt="Koi logo" src="asset/logo.webp" width="500px"/><br/>
 KOI
 </h1>
+
 <p align="center">Goroutine and Worker Manager</p>
 
 <p align="center">
-<a href="https://pkg.go.dev/github.com/1995parham/koi?tab=doc"target="_blank">
-    <img src="https://img.shields.io/badge/Go-1.18+-00ADD8?style=for-the-badge&logo=go" alt="go version" />
-</a>&nbsp;
+
+<a href="https://pkg.go.dev/github.com/1995parham/koi?tab=doc" target="_blank">
+<img src="https://img.shields.io/badge/Go-1.18+-00ADD8?style=for-the-badge&logo=go" alt="go version" />
+</a>
+
 <img src="https://img.shields.io/badge/license-apache_2.0-red?style=for-the-badge&logo=none" alt="license" />
 
 <img src="https://img.shields.io/badge/Version-1.0.1-informational?style=for-the-badge&logo=none" alt="version" />
+
+<img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/1995parham/koi/ci.yaml?style=for-the-badge" />
+
 </p>
 
 # Installation
