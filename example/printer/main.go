@@ -32,6 +32,6 @@ func main() {
 
 	log.Println("all job added")
 
-	for {
+	for { // nolint: staticcheck
 	}
 }
