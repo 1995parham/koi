@@ -10,6 +10,7 @@ import (
 func main() {
 	pond := koi.NewPond[int, int]()
 
+	// nolint: gomnd
 	printWorker := koi.Worker[int, int]{
 		ConcurrentCount: 2,
 		QueueSize:       10,
