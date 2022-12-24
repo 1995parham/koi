@@ -27,6 +27,11 @@ go get github.com/1995parham/koi
 
 # Usage
 
+In Koi you first register a worker on a Pond then push your inputs.
+Your worker has concurrency configuration for handling inputs.
+Worker has generic interface. The first generic parameter is an input rype and the second parameter
+is an output parameter.
+
 ```go
 package main
 
