@@ -73,7 +73,7 @@ func main() {
 }
 ```
 
-**Note**: `pond.AddJob` is non-blocking unless worker queue is full.
+**Note**: `pond.AddWork` is non-blocking unless worker queue is full.
 
 # Terminology
 
