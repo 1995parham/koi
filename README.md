@@ -3,7 +3,7 @@
 KOI
 </h1>
 
-<p align="center">Goroutine and Worker Manager</p>
+<p align="center">Generic Goroutine and Worker Manager</p>
 
 <p align="center">
 
