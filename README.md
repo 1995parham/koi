@@ -13,7 +13,7 @@ KOI
 
 <img src="https://img.shields.io/badge/license-apache_2.0-red?style=for-the-badge&logo=none" alt="license" />
 
-<img src="https://img.shields.io/badge/Version-1.0.1-informational?style=for-the-badge&logo=none" alt="version" />
+
 
 <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/1995parham/koi/ci.yaml?style=for-the-badge" />
 
