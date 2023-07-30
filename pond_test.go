@@ -1,6 +1,7 @@
 package koi_test
 
 import (
+	"errors"
 	"sync"
 	"testing"
 	"time"
@@ -41,4 +42,14 @@ func TestNoReturn(t *testing.T) {
 	}
 
 	wg.Wait()
+}
+
+func TestWorkerNotFound(t *testing.T) {
+	t.Parallel()
+
+	pond := koi.NewPond[int, koi.NoReturn]()
+
+	if _, err := pond.AddWork("printer", 1); !errors.Is(err, koi.ErrWorkerNotFound) {
+		t.Error("expects not found error")
+	}
 }
