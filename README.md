@@ -11,6 +11,7 @@
     </a>
     <img src="https://img.shields.io/badge/license-apache_2.0-red?style=for-the-badge&logo=none" alt="license" />
     <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/1995parham/koi/ci.yaml?style=for-the-badge" />
+    <img alt="Codecov" src="https://img.shields.io/codecov/c/github/1995parham/koi?logo=codecov&style=for-the-badge">
 </p>
 
 ## Installation
