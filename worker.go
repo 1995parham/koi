@@ -22,8 +22,8 @@ type Worker[T any, E any] struct {
 	Semaphore   *semaphore.Weighted
 }
 
-func NewWoker[T any, E any](work func(T) E, queueSize uint, concurrentCount int64) (Worker[T, E], error) {
-	w := Worker[T, E]{
+func NewWoker[T any, E any](work func(T) E, queueSize uint, concurrentCount int64) (*Worker[T, E], error) {
+	w := &Worker[T, E]{
 		QueueSize:       queueSize,
 		ConcurrentCount: concurrentCount,
 		Work:            work,
@@ -35,14 +35,9 @@ func NewWoker[T any, E any](work func(T) E, queueSize uint, concurrentCount int6
 	return w, w.Validate()
 }
 
-func MustNewWoker[T any, E any](work func(T) E, queueSize uint, concurrentCount int64) Worker[T, E] {
-	w := Worker[T, E]{
-		QueueSize:       queueSize,
-		ConcurrentCount: concurrentCount,
-		Work:            work,
-	}
-
-	if err := w.Validate(); err != nil {
+func MustNewWoker[T any, E any](work func(T) E, queueSize uint, concurrentCount int64) *Worker[T, E] {
+	w, err := NewWoker(work, queueSize, concurrentCount)
+	if err != nil {
 		panic(err)
 	}
 
