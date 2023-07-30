@@ -2,23 +2,20 @@ package koi
 
 import (
 	"errors"
-
-	"golang.org/x/sync/semaphore"
 )
 
 var (
-	errWorkerNotFound     = errors.New("worker Not Found")
-	errMinConcurrentCount = errors.New("concurrent count must be at least 1")
-	errNegativeQueueSize  = errors.New("worker request queue size can not be negative")
+	ErrWorkerNotFound     = errors.New("worker not found")
+	ErrMinConcurrentCount = errors.New("concurrent count must be at least 1")
 )
 
 type Pond[T any, E any] struct {
-	Workers map[string]innerWorker[T, E]
+	Workers map[string]Worker[T, E]
 }
 
 func NewPond[T any, E any]() *Pond[T, E] {
 	return &Pond[T, E]{
-		Workers: make(map[string]innerWorker[T, E]),
+		Workers: make(map[string]Worker[T, E]),
 	}
 }
 
@@ -27,24 +24,23 @@ func (p *Pond[T, E]) RegisterWorker(id string, worker Worker[T, E]) error {
 		return err
 	}
 
-	innerWorker := innerWorker[T, E]{
-		Worker:      worker,
-		ResultChan:  make(chan *E, worker.QueueSize),
-		RequestChan: make(chan T, worker.QueueSize),
-		Semaphore:   semaphore.NewWeighted(worker.ConcurrentCount),
-	}
+	go p.manageWorker(worker)
 
-	go p.manageWorker(innerWorker)
-
-	p.Workers[id] = innerWorker
+	p.Workers[id] = worker
 
 	return nil
 }
 
-func (p *Pond[T, E]) AddWork(workerID string, request T) (chan *E, error) {
+func (p *Pond[T, E]) MustRegisterWorker(id string, worker Worker[T, E]) {
+	if err := p.RegisterWorker(id, worker); err != nil {
+		panic(err)
+	}
+}
+
+func (p *Pond[T, E]) AddWork(workerID string, request T) (<-chan E, error) {
 	worker, ok := p.Workers[workerID]
 	if !ok {
-		return nil, errWorkerNotFound
+		return nil, ErrWorkerNotFound
 	}
 
 	// add request to worker queue
@@ -53,7 +49,7 @@ func (p *Pond[T, E]) AddWork(workerID string, request T) (chan *E, error) {
 	return worker.ResultChan, nil
 }
 
-func (p Pond[T, E]) ResultChan(workerID string) chan *E {
+func (p Pond[T, E]) ResultChan(workerID string) <-chan E {
 	worker, ok := p.Workers[workerID]
 
 	if ok {
@@ -63,7 +59,7 @@ func (p Pond[T, E]) ResultChan(workerID string) chan *E {
 	return nil
 }
 
-func (p *Pond[T, E]) manageWorker(worker innerWorker[T, E]) {
+func (p *Pond[T, E]) manageWorker(worker Worker[T, E]) {
 	for request := range worker.RequestChan {
 		worker.Acquire()
 
