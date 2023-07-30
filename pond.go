@@ -60,9 +60,7 @@ func (p Pond[T, E]) ResultChan(workerID string) <-chan E {
 }
 
 func (p *Pond[T, E]) manageWorker(worker *Worker[T, E]) {
-	for request := range worker.RequestChan {
-		worker.Acquire()
-
-		go worker.work(request)
+	for i := 0; i < worker.ConcurrentCount; i++ {
+		go worker.work()
 	}
 }

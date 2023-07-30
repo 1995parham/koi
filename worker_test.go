@@ -15,7 +15,7 @@ func TestNewWorker(t *testing.T) {
 	}
 
 	cases := []struct {
-		concurrentCount int64
+		concurrentCount int
 		expectedErr     error
 	}{
 		{
