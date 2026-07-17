@@ -1,8 +1,7 @@
-<h1 align="center">
+<p align="center">
     <img alt="Koi logo" src="./.github/asset/logo.jpg" width="500px"/><br/>
-</h1>
 
-<p align="center">Generic Goroutine and Worker Manager</p>
+<h6 align="center">Generic Goroutine and Worker Manager</h6>
 
 <p align="center">
     <a href="https://pkg.go.dev/github.com/1995parham/koi?tab=doc" target="_blank">
