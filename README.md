@@ -1,6 +1,5 @@
 <h1 align="center">
-    <img alt="Koi logo" src="./.github/asset/logo.webp" width="500px"/><br/>
-    KOI
+    <img alt="Koi logo" src="./.github/asset/logo.jpg" width="500px"/><br/>
 </h1>
 
 <p align="center">Generic Goroutine and Worker Manager</p>
@@ -55,12 +54,12 @@ func main() {
   return koi.None
  }
 
- // nolint: gomnd
- printWorker := koi.MustNewWoker(printer, 2, 10)
+ //nolint:mnd
+ printWorker := koi.MustNewWorker(printer, 2, 10)
 
  pond.MustRegisterWorker("printer", printWorker)
 
- for i := 0; i < 10; i++ {
+ for i := range 10 {
   wg.Add(1)
 
   if _, err := pond.AddWork("printer", i); err != nil {
@@ -69,7 +68,11 @@ func main() {
  }
 
  wg.Wait()
- log.Println("all job added")
+
+ // stop the workers and release their goroutines.
+ pond.Close()
+
+ log.Println("all jobs done")
 }
 ```
 
