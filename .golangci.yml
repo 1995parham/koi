@@ -1,6 +1,7 @@
 ---
+version: "2"
 linters:
-  enable-all: true
+  default: all
   disable:
     # it should improve to support more known patterns
     - varnamelen
@@ -8,15 +9,4 @@ linters:
     # it isn't our way
     - tagliatelle
     - depguard
-    # deprecated linters
-    - maligned
-    - scopelint
-    - golint
-    - interfacer
-    - exhaustivestruct
     - ireturn
-    - varcheck
-    - ifshort
-    - deadcode
-    - nosnakecase
-    - structcheck

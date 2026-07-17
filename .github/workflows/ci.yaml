@@ -16,7 +16,6 @@ jobs:
         uses: golangci/golangci-lint-action@v9
         with:
           version: latest
-          args: --enable-all
       - run: go test -v -race ./... -covermode=atomic -coverprofile=coverage.out
       - uses: codecov/codecov-action@v4
         with:
