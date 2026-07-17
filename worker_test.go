@@ -33,7 +33,7 @@ func TestNewWorker(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		if _, err := koi.NewWoker(printer, 10, c.concurrentCount); !errors.Is(err, c.expectedErr) {
+		if _, err := koi.NewWorker(printer, 10, c.concurrentCount); !errors.Is(err, c.expectedErr) {
 			t.Error("worker creation failed")
 		}
 	}
