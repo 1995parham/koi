@@ -1,5 +1,6 @@
 <p align="center">
-    <img alt="Koi logo" src="./.github/asset/logo.jpg" width="500px"/><br/>
+    <img alt="Koi logo" src="./.github/asset/logo.jpg" width="500px"/>
+</p>
 
 <h6 align="center">Generic Goroutine and Worker Manager</h6>
 
@@ -25,8 +26,8 @@ go get github.com/1995parham/koi
 In Koi you first register a worker on a Pond then push your inputs.
 Your worker has concurrency configuration for handling inputs.
 
-Worker has generic interface. The first generic parameter is an input rype and the second parameter
-is an output parameter.
+The worker is generic: the first type parameter is the input type and the second is the output type.
+Use `koi.NoReturn` as the output type for fire-and-forget workers that produce no result.
 
 ```go
 package main
@@ -75,7 +76,12 @@ func main() {
 }
 ```
 
-**Note**: `pond.AddWork` is non-blocking unless worker queue is full.
+**Note**: `pond.AddWork` is non-blocking unless the worker queue is full.
+
+When a worker returns results, read them from `pond.ResultChan(id)`, or use
+`pond.MapResults(id, fn)` — a Go 1.27 generic method that returns a channel of
+the worker's results transformed by `fn`. Call `pond.Close()` to stop the
+workers and release their goroutines when you are done.
 
 ## Terminology
 
